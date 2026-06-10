@@ -8,6 +8,18 @@ terraform {
   }
   # Версия CLI Terraform
   required_version = ">= 0.13"
+
+  backend "s3" {
+    endpoint = "https://storage.yandexcloud.net"
+    bucket = "s16128071-terraform"
+    region = "ru-central1"
+    key = "state/terraform.tfstate"
+
+    skip_region_validation = true
+    skip_credentials_validation = true
+    skip_requesting_account_id = true
+    skip_s3_checksum = true 
+  }
 }
 
 # Зона доступности, где по умолчанию будут создаваться все ресурсы
