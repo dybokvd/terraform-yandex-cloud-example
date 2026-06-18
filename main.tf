@@ -29,7 +29,9 @@ provider "yandex" {
 
 # Тип блока, тип ресурса, имя блока
 resource "yandex_compute_instance" "vm-1" {
-  name = var.name
+  for_each = toset(var.vm_names)
+  name = "terraform-test-${var.name_prefix}-${each.key}"
+
   resources {
     cores  = var.vm_size.cores
     memory = var.vm_size.memory

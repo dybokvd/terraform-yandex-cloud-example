@@ -1,7 +1,11 @@
-variable "name" {
-  description = "Name of VM"
+variable "name_prefix" {
+  description = "Уникальный префикс для имён ресурсов"
   type        = string
-  default     = "test-vm-terraform"
+}
+
+variable "vm_names" {
+  type    = list
+  default = ["vm-1"]
 }
 
 # ID образа загрузочного диска
