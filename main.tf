@@ -29,10 +29,10 @@ provider "yandex" {
 
 # Тип блока, тип ресурса, имя блока
 resource "yandex_compute_instance" "vm-1" {
-  name = "test-vm-terraform"
+  name = var.name
   resources {
-    cores  = 2
-    memory = 2
+    cores  = var.vm_size.cores
+    memory = var.vm_size.memory
   }
 
   scheduling_policy {
@@ -41,14 +41,14 @@ resource "yandex_compute_instance" "vm-1" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd806u1okplml22f4pmo"
+      image_id = var.boot_disk
     }
   }
 
   network_interface {
-    subnet_id = "e9b17c6fjq9vaoq182t9"
+    subnet_id = var.network_interface
     # Включаем присвоение публичного IP-адреса
-    nat = false
+    nat = true
   }
 
   metadata = {
