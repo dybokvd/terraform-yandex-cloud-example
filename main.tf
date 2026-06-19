@@ -60,13 +60,14 @@ resource "yandex_compute_instance" "vm-1" {
   allow_stopping_for_update = true
 
   secondary_disk {
-    disk_id = yandex_compute_disk.disk-1.id
+    disk_id = yandex_compute_disk.disk-1[each.key].id
     auto_delete = false
   }
 }
 
 resource "yandex_compute_disk" "disk-1" {
-  name = "test-disk-terraform"
+  for_each = toset(var.vm_names)
+  name = "terraform-test-disk-${var.name_prefix}-${each.key}"
   type = "network-hdd"
   zone = "ru-central1-a"
   size = 3
