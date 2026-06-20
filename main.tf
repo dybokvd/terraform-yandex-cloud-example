@@ -29,7 +29,6 @@ provider "yandex" {
 
 module "tf-yc-instance" {
   source = "./modules/tf-yc-instance"
-  name = "terraform-dm-vm"
   name_prefix = "s16128071"
   vm_size = {
     memory = 4
